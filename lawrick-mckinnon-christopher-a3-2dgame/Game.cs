@@ -11,6 +11,16 @@ namespace MohawkGame2D
         Camera cam;
         Vector2 squarePos = new(400, 300);
         Vector2 squareSize = new(25, 25);
+        string groundTexture = "C:\\Users\\Abstrxcted\\source\\repos\\10003-a3-2DGame\\lawrick-mckinnon-christopher-a3-2dgame\\Assets\\orb.png";
+        Entity floor = new Entity(new Vector2(400, 300), 0.0f, new Vector2(0, 0), 1.0f, true);
+
+        // Sprite file paths
+        string assetPath = "C:\\Users\\Abstrxcted\\source\\repos\\10003-a3-2DGame\\lawrick-mckinnon-christopher-a3-2dgame\\Assets\\";
+        string[] spriteNames = [
+            "orb.png",
+            "pixel-ground.png",
+            "survivor.png"
+            ];
 
         public void Setup()
         {
@@ -18,7 +28,22 @@ namespace MohawkGame2D
             Window.SetSize(800, 600);
             Window.TargetFPS = 60;
 
+
+            // Load sprites
+            for (int i = 0; i < spriteNames.Length; i++)
+            {
+                // Display loading textures
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine($"Loading asset #{i+1}, {spriteNames[i]}...");
+                Console.ForegroundColor = ConsoleColor.White;
+                // Load each texture
+                Graphics.LoadTexture(assetPath + spriteNames[i]);
+            }
+
             BeginScene();
+
+
+
         }
 
         public void BeginScene()
@@ -26,9 +51,14 @@ namespace MohawkGame2D
             cam = new Camera(10, 10, 10, 10);
             cam.SetPosition(new Vector2(20,20));
             cam.SetScale(1.0f);
+
+            floor.Initialize(groundTexture);
+
         }
         public void Render(int spacing)
         {
+            
+            // Grid
             Draw.LineSize = 1;
             Draw.LineColor = new Color(255, 0, 0);
             for (int i = 0; i < (Window.Width + Window.Width); i += spacing)
@@ -40,12 +70,13 @@ namespace MohawkGame2D
                 Draw.Line(0, i, Window.Width, i);
             }
 
+            // Camera
             Draw.LineColor = Color.Blue;
             Draw.Circle(cam.GetPosition(), 5f);
 
-            Draw.Rectangle(cam.WorldToScreenPos(squarePos), squareSize*cam.GetScale());
 
 
+            
         }
         public void ControlsUpdate()
         {

@@ -19,6 +19,10 @@ namespace MohawkGame2D
         {
 
         }
+        public Camera()
+        {
+
+        }
         
         // Get and Set methods
         public void SetPosition(Vector2 position){this.position = position;}
