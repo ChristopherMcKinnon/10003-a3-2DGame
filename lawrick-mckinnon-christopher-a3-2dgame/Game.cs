@@ -13,15 +13,15 @@ namespace MohawkGame2D
         Vector2 squareSize = new(25, 25);
         string groundTexture = "C:\\Users\\Abstrxcted\\source\\repos\\10003-a3-2DGame\\lawrick-mckinnon-christopher-a3-2dgame\\Assets\\orb.png";
         Entity floor = new Entity(new Vector2(400, 300), 0.0f, new Vector2(0, 0), 1.0f, true);
+        // Place your variables here:
 
-        // Sprite file paths
-        string assetPath = "C:\\Users\\Abstrxcted\\source\\repos\\10003-a3-2DGame\\lawrick-mckinnon-christopher-a3-2dgame\\Assets\\";
-        string[] spriteNames = [
-            "orb.png",
-            "pixel-ground.png",
-            "survivor.png"
-            ];
+        Vector2 canvasSize = new Vector2(800, 600);
+        int targetFPS = 60;
+        Scene currentScene;
 
+        /// <summary>
+        ///     Setup runs once before the game loop begins.
+        /// </summary>
         public void Setup()
         {
             Window.SetTitle("2D Game");
