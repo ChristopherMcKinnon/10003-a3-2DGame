@@ -15,7 +15,7 @@ using System.Numerics;
 public static class Program
 {
     // Framebuffer information
-    private const int MaxRenderSize = 1400;//4096;
+    private const int MaxRenderSize = 4096;
     private static readonly RenderTexture2D[] buffers = new RenderTexture2D[2];
     private const ConfigFlags WindowConfigFlags = ConfigFlags.AlwaysRunWindow | ConfigFlags.VSyncHint;
 

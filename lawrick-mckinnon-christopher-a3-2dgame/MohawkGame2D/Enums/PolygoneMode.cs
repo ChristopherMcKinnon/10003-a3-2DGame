@@ -4,21 +4,20 @@
  * Game Design (374): GAME 10003 Game Development Foundations
  *////////////////////////////////////////////////////////////////////////
 
-namespace MohawkGame2D
+namespace MohawkGame2D;
+
+/// <summary>
+///     Mode for drawing polygons.
+/// </summary>
+public enum PolygoneMode
 {
     /// <summary>
-    ///     Mode for drawing polygons.
+    ///     Draw polygon touching outside bound of radius.
     /// </summary>
-    public enum PolygoneMode
-    {
-        /// <summary>
-        ///     Draw polygon touching outside bound of radius.
-        /// </summary>
-        OutsideRadius,
+    OutsideRadius,
 
-        /// <summary>
-        ///     Draw polygon touching inside bound of radius.
-        /// </summary>
-        InsideRadius,
-    }
+    /// <summary>
+    ///     Draw polygon touching inside bound of radius.
+    /// </summary>
+    InsideRadius,
 }

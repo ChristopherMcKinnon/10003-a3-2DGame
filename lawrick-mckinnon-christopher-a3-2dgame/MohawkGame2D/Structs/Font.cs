@@ -6,62 +6,61 @@
 
 using System.IO;
 
-namespace MohawkGame2D
+namespace MohawkGame2D;
+
+/// <summary>
+///     Represents a font.
+/// </summary>
+/// <remarks>
+///     Wrapper around Raylib.Font
+/// </remarks>
+public readonly record struct Font
 {
     /// <summary>
-    ///     Represents a font.
+    ///     File path of this font.
     /// </summary>
-    /// <remarks>
-    ///     Wrapper around Raylib.Font
-    /// </remarks>
-    public readonly record struct Font
+    public string FilePath { get; init; }
+
+    /// <summary>
+    ///     Name of this font file.
+    /// </summary>
+    public string FileName { get; init; }
+
+    /// <summary>
+    ///     Unique key identifier for this font at this size.
+    /// </summary>
+    public string Key { get; init; }
+
+    /// <summary>
+    ///     Size of glyph raster in pixels.
+    /// </summary>
+    public int Size { get; init; }
+
+    [GeneratorTools.OmitFromDocumentation]
+    public Raylib_cs.Font RaylibFont { get; init; }
+
+    [GeneratorTools.OmitFromDocumentation]
+    public static implicit operator Font(Raylib_cs.Font raylibFont)
     {
-        /// <summary>
-        ///     File path of this font.
-        /// </summary>
-        public string FilePath { get; init; }
-
-        /// <summary>
-        ///     Name of this font file.
-        /// </summary>
-        public string FileName { get; init; }
-
-        /// <summary>
-        ///     Unique key identifier for this font at this size.
-        /// </summary>
-        public string Key { get; init; }
-
-        /// <summary>
-        ///     Size of glyph raster in pixels.
-        /// </summary>
-        public int Size { get; init; }
-
-        [GeneratorTools.OmitFromDocumentation]
-        public Raylib_cs.Font RaylibFont { get; init; }
-
-        [GeneratorTools.OmitFromDocumentation]
-        public static implicit operator Font(Raylib_cs.Font raylibFont)
+        var font = new Font()
         {
-            var font = new Font()
-            {
-                RaylibFont = raylibFont,
-                Key = $"{Path.GetRandomFileName()}@{raylibFont.BaseSize}px",
-                Size = raylibFont.BaseSize,
-            };
-            return font;
-        }
+            RaylibFont = raylibFont,
+            Key = $"{Path.GetRandomFileName()}@{raylibFont.BaseSize}px",
+            Size = raylibFont.BaseSize,
+        };
+        return font;
+    }
 
-        [GeneratorTools.OmitFromDocumentation]
-        public static implicit operator Raylib_cs.Font(Font font)
-        {
-            var raylibFont = font.RaylibFont;
-            return raylibFont;
-        }
+    [GeneratorTools.OmitFromDocumentation]
+    public static implicit operator Raylib_cs.Font(Font font)
+    {
+        var raylibFont = font.RaylibFont;
+        return raylibFont;
+    }
 
-        public override readonly string ToString()
-        {
-            string value = $"{nameof(Font)}({Key})";
-            return value;
-        }
+    public override readonly string ToString()
+    {
+        string value = $"{nameof(Font)}({Key})";
+        return value;
     }
 }

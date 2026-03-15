@@ -11,14 +11,17 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
-        
-
+        int[] windowSize = [800, 600];
+        Scene scene = new Scene();
         /// <summary>
         ///     Setup runs once before the game loop begins.
         /// </summary>
         public void Setup()
         {
-            
+            Window.SetSize(windowSize[0], windowSize[1]);
+            Window.SetTitle("2D Game");
+            Window.TargetFPS = 60;
+            scene.GameSceneInit();
         }
 
         /// <summary>
@@ -26,7 +29,10 @@ namespace MohawkGame2D
         /// </summary>
         public void Update()
         {
-            
+            Window.ClearBackground(Color.OffWhite);
+
+            scene.GameSceneUpdate();
+
         }
     }
 
