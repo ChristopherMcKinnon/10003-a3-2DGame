@@ -9,11 +9,11 @@ namespace MohawkGame2D
     {
         
         public Vector2 position;
-        float rotation;
-        float scale;
-        int winScale = (int)MathF.Min(Window.Width, Window.Height) / 2;
-        int worldScale = 100;
-        Scene scene;
+        public float rotation;
+        public float scale;
+        public int winScale = (int)MathF.Min(Window.Width, Window.Height) / 2;
+        public int worldScale = 100;
+        public Scene scene;
 
 
         public Camera(Scene setScene, float left, float right, float bottom, float top)

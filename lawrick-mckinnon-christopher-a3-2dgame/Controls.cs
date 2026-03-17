@@ -12,7 +12,7 @@ namespace MohawkGame2D
         public Player player;
         public float moveSpeed;
         public bool canShoot = true;
-        float zoomLimit = 0.4f;
+        public float zoomLimit = 0.4f;
 
 
         public Controls(Scene setScene, Camera setCamera, Player setPlayer, float setMoveSpeed)

@@ -10,22 +10,23 @@ namespace MohawkGame2D
         public Scene scene;
         public Camera camera;
 
-        Texture2D sprite1;
-        Texture2D sprite2;
-        Texture2D currentSprite;
+        public Texture2D sprite1;
+        public Texture2D sprite2;
+        public Texture2D currentSprite;
 
-        Vector2 playerPos;
+        public Vector2 position;
+        public Vector2 playerScreenPos;
         public List<Bullet> liveBullets = new List<Bullet>();
 
 
 
-        int bulletCount;
+        public int bulletCount;
 
-        float bulletSpeed;
-        float bulletSize;
-        float bulletSpread;
+        public float bulletSpeed;
+        public float bulletSize;
+        public float bulletSpread;
 
-        float playerSize = 50f;
+        public float playerSize = 50f;
 
         public Player(Scene setScene, Camera setCamera)
         {
@@ -34,7 +35,8 @@ namespace MohawkGame2D
             this.sprite1 = Graphics.LoadTexture("../../../../../10003-a3-2DGame/lawrick-mckinnon-christopher-a3-2dgame/Assets/survivor-knife.png");
             this.sprite2 = Graphics.LoadTexture("../../../../../10003-a3-2DGame/lawrick-mckinnon-christopher-a3-2dgame/Assets/survivor-gun.png");
             this.currentSprite = sprite2;
-            this.playerPos = camera.TransformVertices(new Vector2(0, 0));
+            this.position = new Vector2(0, 0);
+            this.playerScreenPos = camera.TransformVertices(this.position);
             this.bulletCount = 4;
             this.bulletSpeed = 500f;
             this.bulletSize = 10f;
@@ -51,7 +53,7 @@ namespace MohawkGame2D
                     liveBullets.Add(
                         new Bullet(
                             this,
-                            playerPos,
+                            playerScreenPos,
                             Vector2.Normalize(Random.Vector2(mousePos*bulletSpread, mousePos/bulletSpread)),
                             this.bulletSpeed,
                             this.bulletSize));
@@ -71,9 +73,9 @@ namespace MohawkGame2D
             Graphics.Rotation += 10;*/
             //Console.WriteLine(Math.Acos(Vector2.Dot(camera.InverseTransformVertices(mousePos), new Vector2(0, 0))));
             Graphics.Scale = camera.GetScale()/2;
-            Graphics.Draw(currentSprite, playerPos, playerPos);
+            Graphics.Draw(currentSprite, playerScreenPos, playerScreenPos);
 
-            Draw.Square(playerPos-new Vector2(playerSize/2, playerSize/2), playerSize);
+            Draw.Square(playerScreenPos-new Vector2(playerSize/2, playerSize/2), playerSize);
             for (int i = 0; i < liveBullets.Count; i++)
             {
                 liveBullets[i].Update();
