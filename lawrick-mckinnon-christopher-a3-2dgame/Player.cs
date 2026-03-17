@@ -23,28 +23,38 @@ namespace MohawkGame2D
 
         float bulletSpeed;
         float bulletSize;
-        
+        float bulletSpread;
+
+        float playerSize = 50f;
+
         public Player(Scene setScene, Camera setCamera)
         {
             this.camera = setCamera;
             this.scene = setScene;
-            this.sprite1 = Graphics.LoadTexture("C:\\Users\\Abstrxcted\\source\\repos\\10003-a3-2DGame\\lawrick-mckinnon-christopher-a3-2dgame\\Assets\\survivor-knife.png");
-            this.sprite2 = Graphics.LoadTexture("C:\\Users\\Abstrxcted\\source\\repos\\10003-a3-2DGame\\lawrick-mckinnon-christopher-a3-2dgame\\Assets\\survivor-gun.png");
-            this.currentSprite = sprite1;
-            this.playerPos = new Vector2(0, 0);
+            this.sprite1 = Graphics.LoadTexture("../../../../../10003-a3-2DGame/lawrick-mckinnon-christopher-a3-2dgame/Assets/survivor-knife.png");
+            this.sprite2 = Graphics.LoadTexture("../../../../../10003-a3-2DGame/lawrick-mckinnon-christopher-a3-2dgame/Assets/survivor-gun.png");
+            this.currentSprite = sprite2;
+            this.playerPos = camera.TransformVertices(new Vector2(0, 0));
             this.bulletCount = 4;
-            this.bulletSpeed = 0.5f;
-            this.bulletSize = 100;
+            this.bulletSpeed = 500f;
+            this.bulletSize = 10f;
+            this.bulletSpread = 0.2f; // Lower the greater the spread
         }
 
         public void Shoot(bool canShoot)
         {
             if (canShoot)
             {
-                Vector2 mousePos = Input.GetMousePosition();
+                Vector2 mousePos = camera.FindMouse();
                 for (int i = 0; i < this.bulletCount; i++)
                 {
-                    liveBullets.Add(new Bullet(this, playerPos, Vector2.Normalize(mousePos-playerPos), bulletSpeed, bulletSize));
+                    liveBullets.Add(
+                        new Bullet(
+                            this,
+                            playerPos,
+                            Vector2.Normalize(Random.Vector2(mousePos*bulletSpread, mousePos/bulletSpread)),
+                            this.bulletSpeed,
+                            this.bulletSize));
                 }
             }
         }
@@ -60,11 +70,10 @@ namespace MohawkGame2D
 
             Graphics.Rotation += 10;*/
             //Console.WriteLine(Math.Acos(Vector2.Dot(camera.InverseTransformVertices(mousePos), new Vector2(0, 0))));
-            Graphics.Scale = 0.5f;
-            
-            Graphics.Draw(currentSprite, camera.TransformVertices(playerPos), camera.TransformVertices(playerPos));
-            Graphics.Scale = 1f;
+            Graphics.Scale = camera.GetScale()/2;
+            Graphics.Draw(currentSprite, playerPos, playerPos);
 
+            Draw.Square(playerPos-new Vector2(playerSize/2, playerSize/2), playerSize);
             for (int i = 0; i < liveBullets.Count; i++)
             {
                 liveBullets[i].Update();

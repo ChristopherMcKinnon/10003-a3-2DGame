@@ -14,6 +14,7 @@ namespace MohawkGame2D
         public bool canShoot = true;
         float zoomLimit = 0.4f;
 
+
         public Controls(Scene setScene, Camera setCamera, Player setPlayer, float setMoveSpeed)
         {
             this.scene = setScene;
@@ -57,11 +58,14 @@ namespace MohawkGame2D
                 {
                     camera.AddScale(-0.01f);
                 }
+                Console.WriteLine(camera.GetScale());
             }
+            // Shoot
             if (Input.IsMouseButtonPressed(MouseInput.Left))
             {
                 player.Shoot(canShoot);
                 Console.WriteLine("Shot");
+                Console.WriteLine(camera.FindMouse());
             }
         }
     }

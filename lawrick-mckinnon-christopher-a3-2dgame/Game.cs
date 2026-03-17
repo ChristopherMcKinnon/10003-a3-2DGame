@@ -11,7 +11,7 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
-        int[] windowSize = [800, 600];
+        int[] windowSize = [600, 600];
         Scene scene = new Scene();
         /// <summary>
         ///     Setup runs once before the game loop begins.

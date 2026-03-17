@@ -11,7 +11,8 @@ namespace MohawkGame2D
         public Vector2 position;
         float rotation;
         float scale;
-        int winScale;
+        int winScale = (int)MathF.Min(Window.Width, Window.Height) / 2;
+        int worldScale = 100;
         Scene scene;
 
 
@@ -54,17 +55,25 @@ namespace MohawkGame2D
         public Vector2 TransformVertices(Vector2 v)
         {
 
-            winScale = (int)MathF.Min(Window.Width, Window.Height)/2;
-
 
             // Math is x*(w/2)+w/2  >  (x+1)(w/2)
 
-            v.X = (v.X/100 + 1.0f) * winScale;
-            v.Y = (-v.Y/100 + 1.0f) * winScale;
+            v.X = (v.X / worldScale + 1.0f) * this.winScale;
+            v.Y = (-v.Y / worldScale + 1.0f) * this.winScale;
 
             return v;
         }
-        
-       
+        public Vector2 FindMouse()
+        {
+            Vector2 mousePos = Input.GetMousePosition();
+            
+
+            mousePos = mousePos / new Vector2(this.winScale*2, this.winScale*2) * 200;
+            mousePos -= new Vector2(100f, 100f);
+            mousePos.Y *= -1;
+            return mousePos;
+        }
+
+
     }
 }
