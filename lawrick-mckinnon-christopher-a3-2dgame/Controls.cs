@@ -27,13 +27,13 @@ namespace MohawkGame2D
         {
             if (Input.IsKeyboardKeyDown(KeyboardInput.W)) // Up
             {
-                camera.AddPosition(new Vector2(0, -moveSpeed * Time.DeltaTime));
+                camera.AddPosition(new Vector2(0, moveSpeed * Time.DeltaTime));
                 //player.Move(new Vector2(0, 1));
                 //Console.WriteLine(camera.GetPosition());
             }
             if (Input.IsKeyboardKeyDown(KeyboardInput.S)) // Down
             {
-                camera.AddPosition(new Vector2(0, moveSpeed * Time.DeltaTime));
+                camera.AddPosition(new Vector2(0, -moveSpeed * Time.DeltaTime));
                 //player.Move(new Vector2(0, -1));
             }
             if (Input.IsKeyboardKeyDown(KeyboardInput.A)) // Left

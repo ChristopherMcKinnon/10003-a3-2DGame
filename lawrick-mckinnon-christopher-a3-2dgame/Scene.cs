@@ -9,10 +9,13 @@ namespace MohawkGame2D
     {
         public float startScale = 1.0f;
         Vector2[] mainMenuButtonVert = [new Vector2()];
+
+        // Set references
         public Camera camera;
         public Controls controls;
         public Player player;
-        public Enemy[] liveEnemies = new Enemy[100];
+        public List<Enemy> liveEnemies = new List<Enemy>();
+        public int enemyAmount;
 
         public Vector2[] worldBorder;
 
@@ -33,14 +36,14 @@ namespace MohawkGame2D
             this.player = new Player(this, camera);
             this.controls = new Controls(this, camera, player);
             this.worldBorder = [new Vector2(-500, -500), new Vector2(500, 500)];
+            this.enemyAmount = 100;
 
             // Set enemies and spawn them
-            for (int i = 0; i < liveEnemies.Length; i++)
+            
+            for (int i = 0; i < this.enemyAmount; i++)
             {
-                //Console.WriteLine(i);
-                liveEnemies[i] = new Enemy(this, this.camera, this.player);
+                liveEnemies.Add(new Enemy(this, this.camera, this.player));
                 liveEnemies[i].RandomSpawn();
-                //Console.WriteLine(liveEnemies[i]);
             }
         }
     public void DrawBorders()
@@ -56,7 +59,7 @@ namespace MohawkGame2D
             player.Update();
             
             // Update each enemy
-            for (int i = 0; i < liveEnemies.Length; i++)
+            for (int i = 0; i < liveEnemies.Count; i++)
             {
                 liveEnemies[i].Update();
             }

@@ -54,6 +54,8 @@ namespace MohawkGame2D
                     liveBullets.Add(
                         new Bullet(
                             this,
+                            this.scene,
+                            this.camera,
                             playerScreenPos,
                             Vector2.Normalize(Random.Vector2(mousePos*bulletSpread, mousePos/bulletSpread)),
                             this.bulletSpeed,

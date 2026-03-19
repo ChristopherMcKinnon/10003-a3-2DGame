@@ -24,18 +24,15 @@ namespace MohawkGame2D
             this.player = setPlayer;
 
             this.health = 10f;
-            this.moveSpeed = 10f;
+            this.moveSpeed = 100f;
             this.size = 30f;
         }
 
-        public void Spawn(Vector2 location)
-        {
-            this.position = location;
-        }
         public Vector2 SetRandomSpawn()
         {
             return Random.Vector2(scene.worldBorder[0], scene.worldBorder[1]);
         }
+
         public void RandomSpawn()
         {
             Vector2 randomSpawn = this.SetRandomSpawn();
@@ -47,11 +44,19 @@ namespace MohawkGame2D
             this.Spawn(randomSpawn);
         }
 
+        public void Spawn(Vector2 location)
+        {
+            this.position = location;
+        }
+
         public void Update()
         {
-            this.direction = player.position - this.position;
+            this.direction = player.position - camera.WorldToScreenPos(position);
+            //this.direction = camera.TransformVertices(player.position) - camera.WorldToScreenPos(position);
+            //Console.WriteLine(this.direction);
             this.position += Vector2.Normalize(direction) * moveSpeed * Time.DeltaTime;
-            Draw.Square(camera.WorldToScreenPos(position), size);
+            //this.position = camera.WorldToScreenPos(position);
+            Draw.Square(camera.TransformVertices(camera.WorldToScreenPos(position)), size);
         }
     }
 }

@@ -45,8 +45,8 @@ namespace MohawkGame2D
             Vector2 screenPosition;
 
             //Convert from -100,-100 to 100,100 cartesian plane first
-            Vector2 transformed = this.TransformVertices(objectPosition);
-
+            //Vector2 transformed = this.TransformVertices(objectPosition);
+            Vector2 transformed = objectPosition;
             // To get the screen position, i'm taking the object - camera position
             // For scale (position) considerations, take the object - camera again and multiply the difference by the scale - 1.0f. If the scale is set as 1, then no additions are needed
 
