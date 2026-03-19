@@ -25,6 +25,7 @@ namespace MohawkGame2D
         public float bulletSpeed;
         public float bulletSize;
         public float bulletSpread;
+        public float moveSpeed;
 
         public float playerSize = 50f;
 
@@ -36,13 +37,13 @@ namespace MohawkGame2D
             this.sprite2 = Graphics.LoadTexture("../../../../../10003-a3-2DGame/lawrick-mckinnon-christopher-a3-2dgame/Assets/survivor-gun.png");
             this.currentSprite = sprite2;
             this.position = new Vector2(0, 0);
-            this.playerScreenPos = camera.TransformVertices(this.position);
+            
             this.bulletCount = 4;
             this.bulletSpeed = 500f;
             this.bulletSize = 10f;
             this.bulletSpread = 0.2f; // Lower the greater the spread
+            this.moveSpeed = 100f;
         }
-
         public void Shoot(bool canShoot)
         {
             if (canShoot)
@@ -73,13 +74,16 @@ namespace MohawkGame2D
             Graphics.Rotation += 10;*/
             //Console.WriteLine(Math.Acos(Vector2.Dot(camera.InverseTransformVertices(mousePos), new Vector2(0, 0))));
             Graphics.Scale = camera.GetScale()/2;
-            Graphics.Draw(currentSprite, playerScreenPos, playerScreenPos);
+            Graphics.Draw(currentSprite, camera.TransformVertices(position), camera.TransformVertices(position));
 
-            Draw.Square(playerScreenPos-new Vector2(playerSize/2, playerSize/2), playerSize);
+
+            Draw.FillColor = Color.Red;
+            Draw.Square(camera.TransformVertices(position)-new Vector2(playerSize/2, playerSize/2), playerSize);
             for (int i = 0; i < liveBullets.Count; i++)
             {
                 liveBullets[i].Update();
             }
+            Draw.FillColor = Color.Black;
         }
         public void setCamera(Camera setCamera) { this.camera = setCamera; }
         public Camera getCamera() { return this.camera; }

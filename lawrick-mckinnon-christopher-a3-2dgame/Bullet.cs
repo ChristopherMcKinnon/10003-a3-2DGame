@@ -30,6 +30,8 @@ namespace MohawkGame2D
 
             }
         }
+
+
         public void Update()
         {
             this.position.Y += bulletSpeed*this.direction.Y*Time.DeltaTime;
@@ -38,7 +40,16 @@ namespace MohawkGame2D
             {
                 Draw.Circle(player.camera.WorldToScreenPos(this.position), this.bulletSize * player.camera.GetScale());
             }
-            //Console.WriteLine(this.position);
+            else 
+            {
+                player.liveBullets.Remove(this);
+            }
+
+
+            // Check outside bounds
+
+
+            Console.WriteLine(this.position);
         }
     }
 }

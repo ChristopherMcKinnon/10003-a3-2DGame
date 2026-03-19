@@ -16,7 +16,7 @@ namespace MohawkGame2D
 
         public Vector2[] worldBorder;
 
-        float moveSpeed = 100f;
+        float moveSpeed = 500f;
 
         /*public Scene ()
         {
@@ -31,19 +31,24 @@ namespace MohawkGame2D
             // Set init variables
             this.camera = new Camera(this, 10, 10, 10, 10);
             this.player = new Player(this, camera);
-            this.controls = new Controls(this, camera, player, this.moveSpeed);
+            this.controls = new Controls(this, camera, player);
             this.worldBorder = [new Vector2(-500, -500), new Vector2(500, 500)];
 
             // Set enemies and spawn them
             for (int i = 0; i < liveEnemies.Length; i++)
             {
-                Console.WriteLine(i);
+                //Console.WriteLine(i);
                 liveEnemies[i] = new Enemy(this, this.camera, this.player);
                 liveEnemies[i].RandomSpawn();
-                Console.WriteLine(liveEnemies[i]);
+                //Console.WriteLine(liveEnemies[i]);
             }
         }
-
+    public void DrawBorders()
+        {
+            Draw.FillColor = Color.Gray;
+            Draw.Rectangle(camera.WorldToScreenPos(worldBorder[0]), new Vector2(Math.Abs(worldBorder[0].X) + Math.Abs(worldBorder[1].X), 200f));
+            Draw.FillColor = Color.Black;
+        }
         // Runs every frame
     public void GameSceneUpdate()
         {
@@ -56,12 +61,21 @@ namespace MohawkGame2D
                 liveEnemies[i].Update();
             }
 
-
+            this.DrawBorders();
             // Temp
             Draw.Rectangle(camera.WorldToScreenPos(new Vector2(100,100)), new Vector2(30*camera.GetScale(), 30*camera.GetScale()));
             Draw.Circle(camera.WorldToScreenPos(new Vector2(-100,0)), 15f);
 
+            Draw.FillColor = Color.Blue;
             
+            Draw.Square(camera.position, 40f);
+            Draw.FillColor = Color.Yellow;
+
+            Draw.Square(camera.WorldToScreenPos(player.position), 40f);
+
+            Draw.FillColor = Color.Black;
+
+            //Console.WriteLine(player.playerScreenPos);
         }
 
         // Check if the object is within the borders of the map

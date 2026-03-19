@@ -11,19 +11,24 @@ namespace MohawkGame2D
         public Vector2 position;
         public float rotation;
         public float scale;
-        public int winScale = (int)MathF.Min(Window.Width, Window.Height) / 2;
-        public int worldScale = 100;
+        public int winScale;
+        public int worldScale;
+        public float moveSpeed;
         public Scene scene;
 
 
         public Camera(Scene setScene, float left, float right, float bottom, float top)
         {
+            //this.position = (new Vector2(0, 0);
             this.scene = setScene;
             this.scale = scene.startScale;
+            this.worldScale = 100;
+            this.moveSpeed = 100f;
+            this.winScale = (int)MathF.Min(Window.Width, Window.Height) / 2;
         }
 
         // Get and Set methods
-        public void SetPosition(Vector2 setPosition) { this.position = setPosition; }
+        public void SetPosition(Vector2 setPosition) { this.position = this.TransformVertices(setPosition); }
         public void AddPosition(Vector2 addPosition) { this.position += addPosition; }
         public Vector2 GetPosition() { return this.position; }
         public void SetRotation(float setRotation) { this.rotation = setRotation; }

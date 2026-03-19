@@ -49,7 +49,7 @@ namespace MohawkGame2D
 
         public void Update()
         {
-            this.direction = player.playerScreenPos - this.position;
+            this.direction = player.position - this.position;
             this.position += Vector2.Normalize(direction) * moveSpeed * Time.DeltaTime;
             Draw.Square(camera.WorldToScreenPos(position), size);
         }
