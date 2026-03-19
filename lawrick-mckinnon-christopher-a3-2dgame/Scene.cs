@@ -49,7 +49,7 @@ namespace MohawkGame2D
     public void DrawBorders()
         {
             Draw.FillColor = Color.Gray;
-            Draw.Rectangle(camera.WorldToScreenPos(worldBorder[0]), new Vector2(Math.Abs(worldBorder[0].X) + Math.Abs(worldBorder[1].X), 200f));
+            Draw.Rectangle(camera.TransformVertices(camera.WorldCameraOffset(worldBorder[0])), new Vector2(Math.Abs(worldBorder[0].X) + Math.Abs(worldBorder[1].X), 200f));
             Draw.FillColor = Color.Black;
         }
         // Runs every frame
@@ -66,15 +66,15 @@ namespace MohawkGame2D
 
             this.DrawBorders();
             // Temp
-            Draw.Rectangle(camera.WorldToScreenPos(new Vector2(100,100)), new Vector2(30*camera.GetScale(), 30*camera.GetScale()));
-            Draw.Circle(camera.WorldToScreenPos(new Vector2(-100,0)), 15f);
+            Draw.Rectangle(camera.TransformVertices(camera.WorldCameraOffset(new Vector2(100,100))), new Vector2(30*camera.GetScale(), 30*camera.GetScale()));
+            Draw.Circle(camera.TransformVertices(camera.WorldCameraOffset(new Vector2(-100,0))), 15f);
 
             Draw.FillColor = Color.Blue;
             
             Draw.Square(camera.position, 40f);
             Draw.FillColor = Color.Yellow;
 
-            Draw.Square(camera.WorldToScreenPos(player.position), 40f);
+            Draw.Square(camera.TransformVertices(camera.WorldCameraOffset(player.position)), 40f);
 
             Draw.FillColor = Color.Black;
 

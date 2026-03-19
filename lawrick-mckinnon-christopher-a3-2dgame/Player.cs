@@ -75,17 +75,16 @@ namespace MohawkGame2D
 
             Graphics.Rotation += 10;*/
             //Console.WriteLine(Math.Acos(Vector2.Dot(camera.InverseTransformVertices(mousePos), new Vector2(0, 0))));
-            Graphics.Scale = camera.GetScale()/2;
-            Graphics.Draw(currentSprite, camera.TransformVertices(position), camera.TransformVertices(position));
+            //Graphics.Scale = camera.GetScale()/2;
+            //Graphics.Draw(currentSprite, camera.TransformVertices(position), camera.TransformVertices(position));
 
 
-            Draw.FillColor = Color.Red;
+            Draw.FillColor = Color.Green;
             Draw.Square(camera.TransformVertices(position)-new Vector2(playerSize/2, playerSize/2), playerSize);
             for (int i = 0; i < liveBullets.Count; i++)
             {
                 liveBullets[i].Update();
             }
-            Draw.FillColor = Color.Black;
         }
         public void setCamera(Camera setCamera) { this.camera = setCamera; }
         public Camera getCamera() { return this.camera; }

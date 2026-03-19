@@ -40,18 +40,16 @@ namespace MohawkGame2D
 
 
         // Convert world to screen
-        public Vector2 WorldToScreenPos(Vector2 objectPosition)
+        public Vector2 WorldCameraOffset(Vector2 objectPosition)
         {
             Vector2 screenPosition;
 
-            //Convert from -100,-100 to 100,100 cartesian plane first
-            //Vector2 transformed = this.TransformVertices(objectPosition);
-            Vector2 transformed = objectPosition;
+            
             // To get the screen position, i'm taking the object - camera position
             // For scale (position) considerations, take the object - camera again and multiply the difference by the scale - 1.0f. If the scale is set as 1, then no additions are needed
 
-            screenPosition.X = transformed.X - this.GetPosition().X + (this.GetScale() - 1.0f) * (transformed.X - this.GetPosition().X - Window.Width / 2);
-            screenPosition.Y = transformed.Y - this.GetPosition().Y + (this.GetScale() - 1.0f) * (transformed.Y - this.GetPosition().Y - Window.Height / 2);
+            screenPosition.X = objectPosition.X - this.GetPosition().X + (this.GetScale() - 1.0f) * (objectPosition.X - this.GetPosition().X - Window.Width / 2);
+            screenPosition.Y = objectPosition.Y + this.GetPosition().Y + (this.GetScale() - 1.0f) * (objectPosition.Y + this.GetPosition().Y - Window.Height / 2);
 
 
             return screenPosition;

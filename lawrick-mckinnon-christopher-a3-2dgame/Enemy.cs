@@ -24,7 +24,7 @@ namespace MohawkGame2D
             this.player = setPlayer;
 
             this.health = 10f;
-            this.moveSpeed = 100f;
+            this.moveSpeed = 30f;
             this.size = 30f;
         }
 
@@ -51,12 +51,13 @@ namespace MohawkGame2D
 
         public void Update()
         {
-            this.direction = player.position - camera.WorldToScreenPos(position);
+            this.direction = player.position - camera.WorldCameraOffset(position);
             //this.direction = camera.TransformVertices(player.position) - camera.WorldToScreenPos(position);
             //Console.WriteLine(this.direction);
             this.position += Vector2.Normalize(direction) * moveSpeed * Time.DeltaTime;
             //this.position = camera.WorldToScreenPos(position);
-            Draw.Square(camera.TransformVertices(camera.WorldToScreenPos(position)), size);
+            Draw.FillColor = Color.Red;
+            Draw.Circle(camera.TransformVertices(camera.WorldCameraOffset(position)), size);
         }
     }
 }
